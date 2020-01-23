@@ -1,0 +1,19 @@
+﻿@model IEnumerable<Project.Models.doctor_Register>
+@{
+    ViewBag.Title = "DoctorInfo";
+}
+    <div class="container">
+
+        <h4 style="text-align:center;border-bottom:1px solid #808080">Doctor Info</h4>
+        @foreach (var item in Model)
+        {
+            <p><label>Name: </label>@item.first_Name</p>
+            <p><label>Last: </label>@item.last_Name</p>
+            <p><label>city: </label>@item.city</p>
+            <p><label>cost: </label>@item.cost</p>
+            <p><label>specilization: </label>@item.specilization</p>
+
+        }
+
+    </div>
+

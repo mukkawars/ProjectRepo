@@ -1,0 +1,20 @@
+﻿@model IEnumerable<Project.Models.doctor_Register>
+
+<div>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title" id="myModalLabel">FriendsInfo</h4>
+    </div>
+
+
+    @foreach (var item in Model)
+    {
+        <p><label>Name: </label>@item.first_Name</p>
+        <p><label>Last: </label>@item.last_Name</p>
+        <p><label>city: </label>@item.city</p>
+        <p><label>cost: </label>@item.cost</p>
+        <p><label>specilization: </label>@item.specilization</p>
+
+    }
+</div>  

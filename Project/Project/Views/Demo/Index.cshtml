@@ -1,0 +1,100 @@
+﻿
+
+@model IEnumerable<Project.Models.doctor_Register>
+@{
+    ViewBag.Title = "Index";
+}
+
+@Html.ActionLink("View All", "Index")
+
+@using (Html.BeginForm("Index", "Demo", FormMethod.Get))
+{
+    @Html.TextBox("searching")
+    <input type="submit" value="search" />
+
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.first_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.mob_Number)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.city)
+        </th>
+        <th></th>
+    </tr>
+    @if (Model != null)
+    {
+    foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.first_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.mob_Number)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.city)
+            </td>
+            <td>
+                @*@Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id=item.Id })*@
+
+                <a href="#" class="anchorDetail" id="@item.mob_Number">Details</a>
+
+            </td>
+        </tr>
+       }
+    }
+
+</table>
+
+
+@section scripts
+{
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script>
+
+        var TeamDetailPostBackURL = '/Demo/Details';
+        $(function () {
+            $(".anchorDetail").click(function () {
+                debugger;
+                var $buttonClicked = $(this);
+                var id = $buttonClicked.attr('id');
+                var options = { "backdrop": "static", keyboard: true };
+                $.ajax({
+                    type: "GET",
+                    url: TeamDetailPostBackURL,
+                    contentType: "application/json; charset=utf-8",
+                    data: { "id": id },
+                    datatype: "json",
+                    success: function (data) {
+                        debugger;
+                        $('#myModalContent').html(data);
+                        $('#myModal').modal(options);
+                        $('#myModal').modal('show');
+
+                    },
+                    error: function () {
+                        alert("Dynamic content load failed.");
+                    }
+                });
+            });
+
+
+            $("#closbtn").click(function () {
+                $('#myModal').modal('hide');
+            });
+        });
+
+    </script>
+
+}
